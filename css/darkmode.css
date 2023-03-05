@@ -1,0 +1,48 @@
+
+  
+  body.dark {
+    background-color: #ff4747;
+  }
+  .checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+  .dark-mode{
+    margin: 6px;
+  }
+  .label {
+    width: 50px;
+    height: 26px;
+    background-color:rgb(207, 76, 164);
+    display: flex;
+    border-radius:50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: relative;
+    transform: scale(1);
+  }
+  
+  .ball {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+  }
+  
+  /*  target the elemenent after the label*/
+  .checkbox:checked + .label .ball{
+    transform: translateX(24px);
+  }
+  
+  .fa-moon {
+    color: rgb(255, 255, 255);
+  }
+  
+  .fa-sun {
+    color: yellow;
+  }

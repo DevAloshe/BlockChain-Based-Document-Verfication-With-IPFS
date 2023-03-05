@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/loader.css" />
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <script src="node_modules\web3\dist\web3.min.js"></script>
+    <script src="js/App.js"></script>
+    <script src="js/qrcode.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <link href="./css/aos.min.css" rel="stylesheet" />
+    <link rel="icon" href="./assets/images/icon.png" />
+    <title>Upload Document</title>
+  </head>
+
+  <body>
+    <!-- Loading Circular Dots -->
+    <div class="loader-wraper">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!--NavigationBar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fa-solid fa-dragon home_text"></i>
+          <span class="home_text">Orio</span>
+          Chain
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="upload.html">Upload</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="verify.html">Verify</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="delete.html">Delete</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">Team</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <button
+              id="loginButton"
+              onclick="connect()"
+              class="btn main-button"
+            >
+              Login
+            </button>
+            <button
+              id="logoutButton"
+              onclick="disconnect()"
+              class="btn main-button"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Body -->
+    <div class="container">
+      <div class="alert alert-danger d-none mt-2">
+        Please download MetaMask at
+        <a target="_blank" href="https://metamask.io/download">Metamask Site</a>
+      </div>
+      <!-- Wallet information -->
+      <div class="row content m-1">
+        <div
+          data-aos="fade-down"
+          class="box wallet-status col-lg-12 d-flex flex-column my-2"
+        >
+          <i class="fa-brands fa-connectdevelop icon"></i>
+          <span id="Exporter-info" class="p-1 mb-2"></span>
+          <span id="userAddress" class="p-1">
+            <span class="text-warning"></span>
+          </span>
+          <span id="network" class="p-1">
+            <span class="text-warning"></span>
+          </span>
+          <span id="userBalance" class="p-1">
+            <span class="text-warning"></span>
+          </span>
+        </div>
+
+        <!-- upload form -->
+        <div data-aos="zoom-in" class="col py-3 data-upload my-3">
+          <input
+            onchange="get_Sha3()"
+            id="doc-file"
+            type="file"
+            accept="application/pdf, image/*"
+          />
+          <span id="note" class="text-danger"></span>
+          <img id="loader" class="d-none" src="files/loader.svg" alt="loader" />
+          <input
+            onclick="sendHash()"
+            class="btn upload-button main-button"
+            type="submit"
+            value="Upload document"
+            id="upload_file_button"
+          />
+        </div>
+      </div>
+      <!-- Transaction information -->
+      <div
+        data-aos="zoom-in"
+        class="box gx-0 my-3 row mx-md-2 transaction-status col-lg"
+      >
+        <div class="left col-md-6 p-3 d-flex flex-column">
+          <span class="p-2 info" id="transaction-hash"></span>
+          <span class="p-2 info" id="file-hash"></span>
+          <span class="p-2 info" id="contract-address"></span>
+          <span class="p-2 info" id="time-stamps"></span>
+          <span class="p-2 info" id="blockNumber"></span>
+          <span class="p-2 info" id="blockHash"></span>
+          <span class="p-2 info" id="to-netowrk"></span>
+          <span class="p-2 info" id="gas-used"></span>
+          <span class="btn-container">
+            <a
+              title="Download QR Code"
+              href="#"
+              id="download-link"
+              data-name="QR-Code"
+              class="download-link"
+              download="image.png"
+            >
+              Download QR-CODE
+            </a>
+            <a
+              target="_blank"
+              title="Verify Document to check if the transaction successfully excuted ."
+              href="#"
+              id="verfiy"
+              style="background-color: #727272;"
+              class="download-link"
+            >
+              Verify Document
+            </a>
+          </span>
+        </div>
+        <div
+          id="qrcode"
+          class="col-md-6 mt-md-2 d-flex justify-content-center align-items-center"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Showing recent transactions -->
+    <div class="latest-tx mt-5">
+      <h5 id="recent-header" class="text-white text-center">
+        Recent Uploaded Documents
+        <br />
+        <i class="fa-solid fa-caret-down"></i>
+      </h5>
+
+      <div class="loading-tx d-none text-center">
+        <img src="./files/tx-loading.svg" alt="" />
+      </div>
+      <div class="transactions row gy-2 gx-5 justify-content-center p-4"></div>
+    </div>
+    <!-- footer -->
+    <div class="container">
+      <footer class="footer-dark">
+        <div class="row">
+          <div class="col-sm-6 col-md-3 item">
+            <h3>Services</h3>
+            <ul>
+              <li><a href="#">Ethereum</a></li>
+              <li><a href="#">Blockchain Tech.</a></li>
+              <li><a href="#">Smart Contracts</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3 item">
+            <h3>About us</h3>
+            <ul>
+              <li><a href="#">Company</a></li>
+              <li><a href="#">Team</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 item text">
+            <h3>
+              <i class="fa-solid fa-dragon"></i>
+              OrioChain
+            </h3>
+            <!-- <a href="https://www.flaticon.com/free-icons/blockchain" title="blockchain icons">Blockchain icons created by photo3idea_studio - Flaticon</a> -->
+            <p>
+              Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus
+              ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique
+              lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.
+            </p>
+          </div>
+          <div class="col-md text-center text-md-start">
+            <h3>Credits</h3>
+            <ul>
+              <li>
+                <a
+                  href="https://undraw.co/illustrations"
+                  title="Indraw illustrations"
+                >
+                  Blockchain illustrations created by undraw
+                </a>
+              </li>
+              <li>
+                <a href="https://www.freepik.com/vectors/futuristic-background">
+                  Futuristic background vector created by freepik -
+                  www.freepik.com
+                </a>
+              </li>
+              <li>
+                <a href="https://www.freepik.com/vectors/tech-world">
+                  Tech world vector created by liuzishan - www.freepik.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://unsplash.com/@theshubhamdhage?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                >
+                  Photo by Shubham Dhage
+                </a>
+                on
+                <a
+                  href="https://unsplash.com/s/photos/blockchain?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                >
+                  Unsplash
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.flaticon.com/free-icons/wings"
+                  title="wings icons"
+                >
+                  Wings icons created by Freepik - Flaticon
+                </a>
+              </li>
+              <li>
+                <a href="https://loading.io/icon/">Icon Loading loading.io</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col item social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+        <p class="copyright">OrioChain © 2022</p>
+      </footer>
+    </div>
+
+    <!-- floating button -->
+    <i onclick="topFunction()" id="scroll-btn" class="fa-solid fa-angle-up"></i>
+
+    <!-- contact us Button -->
+    <div>
+      <a href="mailto:devaloshe@gmail.com?subject=From OrioChain Site">
+        <i class="mail-us fa-solid fa-headset"></i>
+      </a>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/aos.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/ipfs.js"></script>
+
+    <!-- Testing IPFS -->
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+          const nodeId = 'ipfs-' + Math.random();
+          const node = await Ipfs.create({ repo: nodeId });
+          console.log("Your node: " + nodeId);
+          window.node = node;
+          const status = node.isOnline() ? 'online' : 'offline';
+          console.log(`Node status: ${status}`);
+  
+          //create a variable with the directory path '/my/beautiful/directory' 
+          // and a file 'awesomesause.txt' with the content 'ABC' 
+  
+                    const a = await node.add({
+              path: 'hello.txt',
+              content: 'Hello World 100'
+            });
+
+            console.log('Added file:', a);
+            console.log('-------------------------------------------------');
+            const cid = 'QmRPQ86rZh5qtSBe9hbbB61VuEibv4NGrgrdixH6QQt4iX'
+
+            for await (const buf of window.node.get(cid)) {
+              console.log(buf);
+             
+            } 
+            let obj = await window.node.get(cid);
+           console.log(obj);
+            console.log('-------------------------------------------------');
+      })
+
+  </script> -->
+  </body>
+</html>
