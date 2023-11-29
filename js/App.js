@@ -1,7 +1,8 @@
 window.CONTRACT = {
-  address: '0x5A116c7a355D8b508aA3D4480Ae78E47efcdEc4D',
-  network: 'https://polygon-rpc.com/',
-  explore: 'https://polygonscan.com/',
+  address: 'Your Contract Address',
+  network: 'blockchain network address Example : https://polygon-rpc.com/',
+  explore: 'blockchain Block Explorer  Example https://polygonscan.com/',
+  // Your Contract ABI 
   abi: [
     {
       anonymous: false,
