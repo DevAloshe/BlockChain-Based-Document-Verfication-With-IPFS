@@ -13,8 +13,8 @@ This project aims to create a secure and decentralized system for document verif
 ## Requirements
 
 - Node.js and npm installed on your system
-- Ganache or any other Ethereum network client
-- IPFS client (optional)
+- MetaMask Wallet
+- IPFS client (Currently not working due ipfs server error)
 
 ## Installation
 
@@ -49,6 +49,9 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 - Solidity and Web3.js documentation
 - IPFS documentation
 - Truffle documentation
+
+# If You want paid Smiliar Projects DM on Telegram @DevAloshe
+### Payment Method only Crypto Currency
 
 
 

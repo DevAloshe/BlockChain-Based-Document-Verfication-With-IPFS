@@ -1,3 +1,7 @@
+
+//Works without using metamsk 
+//just provide the network address
+
 window.CONTRACT = {
   address: '0x5A116c7a355D8b508aA3D4480Ae78E47efcdEc4D',
   network: 'https://polygon-rpc.com/',
@@ -214,6 +218,7 @@ window.CONTRACT = {
     },
   ],
 }
+//I used Web3.providers.HttpProvider instead of MetaMask Provider so We can Verify Docs without Wallet
 const web3 = new Web3(new Web3.providers.HttpProvider(window.CONTRACT.network))
 const contract = new web3.eth.Contract(
   window.CONTRACT.abi,
@@ -223,27 +228,30 @@ const contract = new web3.eth.Contract(
 window.onload = async () => {
   $('#loader').hide()
   $('.loader-wraper').fadeOut('slow')
-  checkURL()
+  //check the Url if it was Passed with document hash 
   $('#upload_file_button').attr('disabled', true)
+  checkURL()
 }
-
 async function verify_Hash() {
+  //Show the loading
   $('#loader').show()
+
   if (window.hashedfile) {
-    /*   I used the contract address as the caller of the function 'findDocHash'
+    /*   I used the contract address (window.CONTRACT.address) as the caller of the function 'findDocHash'
         you can use any address because it used just for reading info from the contract
     */
     await contract.methods
       .findDocHash(window.hashedfile)
       .call({ from: window.CONTRACT.address })
       .then((result) => {
-        console.log(result)
         $('.transaction-status').removeClass('d-none')
         window.newHash = result
         if ((result[0] != 0) & (result[1] != 0)) {
-          print_info(result, true)
+          //Doc Verified
+          print_verification_info(result, true)
         } else {
-          print_info(result, false)
+         //Doc not Verified
+          print_verification_info(result, false)
         }
       })
   }
@@ -257,7 +265,7 @@ function checkURL() {
 
   verify_Hash()
 }
-
+// get Sha3 Hash from the file
 async function get_Sha3() {
   $('#note').html(`<h5 class="text-warning">Hashing Your Document 😴...</h5>`)
   $('#upload_file_button').attr('disabled', false)
@@ -285,7 +293,7 @@ async function get_Sha3() {
   }
 }
 
-function print_info(result, is_verified) {
+function print_verification_info(result, is_verified) {
   //Default Image for not Verified Docunets
   document.getElementById('student-document').src = './files/notvalid.svg'
   $('#loader').hide()

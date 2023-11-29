@@ -214,6 +214,8 @@ window.CONTRACT = {
     },
   ],
 }
+
+//login
 async function connect() {
   if (window.ethereum) {
     try {
@@ -251,11 +253,13 @@ window.onload = async () => {
   window.userAddress = window.localStorage.getItem('userAddress')
 
   if (window.ethereum) {
+    //gere we need MetaMask to read and write to our Contract
     window.web3 = new Web3(window.ethereum)
     window.contract = new window.web3.eth.Contract(
       window.CONTRACT.abi,
       window.CONTRACT.address,
     )
+    //checking if user loged in
     if (window.userAddress.length > 10) {
       // let isLocked =await window.ethereum._metamask.isUnlocked();
       //  if(!isLocked) disconnect();
@@ -270,6 +274,7 @@ window.onload = async () => {
       }" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-square-arrow-up-right text-warning"></i></a>  
        </a>`)
 
+//if admin is viewed then show the doc,exporter counters
       if (window.location.pathname == '/admin.html') await getCounters()
 
       await getExporterInfo()
@@ -373,6 +378,7 @@ function printUploadInfo(result) {
   listen()
 }
 
+
 async function sendHash() {
   $('#loader').removeClass('d-none')
   $('#upload_file_button').slideUp()
@@ -428,6 +434,8 @@ async function sendHash() {
   }
 }
 
+//delete document hash from the contract
+//only the exporter who add it can delete it
 async function deleteHash() {
   $('#loader').removeClass('d-none')
   $('#upload_file_button').slideUp()
@@ -468,6 +476,7 @@ async function deleteHash() {
   }
 }
 
+//get current time
 function getTime() {
   let d = new Date()
   a =
@@ -485,6 +494,7 @@ function getTime() {
   return a
 }
 
+//get network name based on ID
 async function get_ChainID() {
   let a = await web3.eth.getChainId()
   console.log(a)
@@ -522,6 +532,7 @@ async function get_ChainID() {
   }
 }
 
+
 function get_Sha3() {
   hide_txInfo()
   $('#note').html(`<h5 class="text-warning">Hashing Your Document 😴...</h5>`)
@@ -551,6 +562,7 @@ function get_Sha3() {
   }
 }
 
+//logout
 function disconnect() {
   $('#logoutButton').hide()
   $('#loginButton').show()
@@ -560,6 +572,7 @@ function disconnect() {
   $('#upload_file_button').addClass('disabled')
 }
 
+//shortcut wallet address
 function truncateAddress(address) {
   if (!address) {
     return
@@ -717,6 +730,7 @@ async function editExporter() {
   }
 }
 
+
 async function deleteExporter() {
   const address = document.getElementById('Exporter-address').value
 
@@ -774,6 +788,8 @@ async function deleteExporter() {
   }
 }
 
+// Generate QR code so any one an Verify the documents
+//note: if you r using local server you need to replace 127.0.0.1 with your machine local ip address got from the router
 function generateQRCode() {
   document.getElementById('qrcode').innerHTML = ''
   console.log('making qr-code...')
@@ -799,6 +815,9 @@ function generateQRCode() {
   //  makeDownload();
 }
 
+//check old transaction and show them if exist
+//Transactions in last afew hours will show but very old transactions wont show 
+// cuz the pastEvents returns transactions in last 999 block
 async function listen() {
   console.log('started...')
   if (window.location.pathname != '/upload.html') return
@@ -808,6 +827,7 @@ async function listen() {
     window.CONTRACT.abi,
     window.CONTRACT.address,
   )
+
   await window.contract.getPastEvents(
     'addHash',
     {
@@ -824,6 +844,7 @@ async function listen() {
   )
 }
 
+//If there is past tx then show them
 function printTransactions(data) {
   document.querySelector('.transactions').innerHTML = ''
   document.querySelector('.loading-tx').classList.add('d-none')
