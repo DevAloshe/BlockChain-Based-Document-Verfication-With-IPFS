@@ -14,7 +14,7 @@ This project aims to create a secure and decentralized system for document verif
 
 - Node.js and npm installed on your system
 - MetaMask Wallet
-- IPFS client (Currently not working due ipfs server error)
+- IPFS API (key and secret) you can get it from infura.io
 
 ## Installation
 
@@ -28,7 +28,7 @@ This project aims to create a secure and decentralized system for document verif
 npm install``
 
 
-3. Open the application in your browser using Liver Server Extension .
+3. Open the application in your browser using Live Server Extension .
 
 
 ## Usage
@@ -49,9 +49,6 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 - Solidity and Web3.js documentation
 - IPFS documentation
 - Truffle documentation
-
-# If You want paid Smiliar Projects DM on Telegram @DevAloshe
-### Payment Method only Crypto Currency
 
 
 
