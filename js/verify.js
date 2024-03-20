@@ -1,241 +1,240 @@
-
-//Works without using metamsk 
+//Works without using metamsk
 //just provide the network address
 
 window.CONTRACT = {
-  address: 'Your Contract Address',
-  network: 'blockchain network address Example : https://polygon-rpc.com/',
-  explore: 'blockchain Block Explorer  Example https://polygonscan.com/',
-  // Your Contract ABI 
+  address: "0xAe4Ff83376FeB888355E3e8A4cFe298E561E002C",
+  network: "https://polygon-rpc.com/",
+  explore: "https://polygonscan.com/",
+  // Your Contract ABI
   abi: [
     {
       anonymous: false,
       inputs: [
         {
           indexed: true,
-          internalType: 'address',
-          name: '_exporter',
-          type: 'address',
+          internalType: "address",
+          name: "_exporter",
+          type: "address",
         },
         {
           indexed: false,
-          internalType: 'string',
-          name: '_ipfsHash',
-          type: 'string',
+          internalType: "string",
+          name: "_ipfsHash",
+          type: "string",
         },
       ],
-      name: 'addHash',
-      type: 'event',
+      name: "addHash",
+      type: "event",
     },
     {
       inputs: [
         {
-          internalType: 'address',
-          name: '_add',
-          type: 'address',
+          internalType: "address",
+          name: "_add",
+          type: "address",
         },
         {
-          internalType: 'string',
-          name: '_info',
-          type: 'string',
+          internalType: "string",
+          name: "_info",
+          type: "string",
         },
       ],
-      name: 'add_Exporter',
+      name: "add_Exporter",
       outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
       inputs: [
         {
-          internalType: 'bytes32',
-          name: 'hash',
-          type: 'bytes32',
+          internalType: "bytes32",
+          name: "hash",
+          type: "bytes32",
         },
         {
-          internalType: 'string',
-          name: '_ipfs',
-          type: 'string',
+          internalType: "string",
+          name: "_ipfs",
+          type: "string",
         },
       ],
-      name: 'addDocHash',
+      name: "addDocHash",
       outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
       inputs: [
         {
-          internalType: 'address',
-          name: '_add',
-          type: 'address',
+          internalType: "address",
+          name: "_add",
+          type: "address",
         },
         {
-          internalType: 'string',
-          name: '_newInfo',
-          type: 'string',
+          internalType: "string",
+          name: "_newInfo",
+          type: "string",
         },
       ],
-      name: 'alter_Exporter',
+      name: "alter_Exporter",
       outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
       inputs: [
         {
-          internalType: 'address',
-          name: '_newOwner',
-          type: 'address',
+          internalType: "address",
+          name: "_newOwner",
+          type: "address",
         },
       ],
-      name: 'changeOwner',
+      name: "changeOwner",
       outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
       inputs: [
         {
-          internalType: 'address',
-          name: '_add',
-          type: 'address',
+          internalType: "address",
+          name: "_add",
+          type: "address",
         },
       ],
-      name: 'delete_Exporter',
+      name: "delete_Exporter",
       outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
       inputs: [
         {
-          internalType: 'bytes32',
-          name: '_hash',
-          type: 'bytes32',
+          internalType: "bytes32",
+          name: "_hash",
+          type: "bytes32",
         },
       ],
-      name: 'deleteHash',
+      name: "deleteHash",
       outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
       inputs: [],
-      stateMutability: 'nonpayable',
-      type: 'constructor',
+      stateMutability: "nonpayable",
+      type: "constructor",
     },
     {
       inputs: [],
-      name: 'count_Exporters',
+      name: "count_Exporters",
       outputs: [
         {
-          internalType: 'uint16',
-          name: '',
-          type: 'uint16',
+          internalType: "uint16",
+          name: "",
+          type: "uint16",
         },
       ],
-      stateMutability: 'view',
-      type: 'function',
+      stateMutability: "view",
+      type: "function",
     },
     {
       inputs: [],
-      name: 'count_hashes',
+      name: "count_hashes",
       outputs: [
         {
-          internalType: 'uint16',
-          name: '',
-          type: 'uint16',
+          internalType: "uint16",
+          name: "",
+          type: "uint16",
         },
       ],
-      stateMutability: 'view',
-      type: 'function',
+      stateMutability: "view",
+      type: "function",
     },
     {
       inputs: [
         {
-          internalType: 'bytes32',
-          name: '_hash',
-          type: 'bytes32',
+          internalType: "bytes32",
+          name: "_hash",
+          type: "bytes32",
         },
       ],
-      name: 'findDocHash',
+      name: "findDocHash",
       outputs: [
         {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
         },
         {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
         },
         {
-          internalType: 'string',
-          name: '',
-          type: 'string',
+          internalType: "string",
+          name: "",
+          type: "string",
         },
         {
-          internalType: 'string',
-          name: '',
-          type: 'string',
+          internalType: "string",
+          name: "",
+          type: "string",
         },
       ],
-      stateMutability: 'view',
-      type: 'function',
+      stateMutability: "view",
+      type: "function",
     },
     {
       inputs: [
         {
-          internalType: 'address',
-          name: '_add',
-          type: 'address',
+          internalType: "address",
+          name: "_add",
+          type: "address",
         },
       ],
-      name: 'getExporterInfo',
+      name: "getExporterInfo",
       outputs: [
         {
-          internalType: 'string',
-          name: '',
-          type: 'string',
+          internalType: "string",
+          name: "",
+          type: "string",
         },
       ],
-      stateMutability: 'view',
-      type: 'function',
+      stateMutability: "view",
+      type: "function",
     },
     {
       inputs: [],
-      name: 'owner',
+      name: "owner",
       outputs: [
         {
-          internalType: 'address',
-          name: '',
-          type: 'address',
+          internalType: "address",
+          name: "",
+          type: "address",
         },
       ],
-      stateMutability: 'view',
-      type: 'function',
+      stateMutability: "view",
+      type: "function",
     },
   ],
-}
+};
 //I used Web3.providers.HttpProvider instead of MetaMask Provider so We can Verify Docs without Wallet
-const web3 = new Web3(new Web3.providers.HttpProvider(window.CONTRACT.network))
+const web3 = new Web3(new Web3.providers.HttpProvider(window.CONTRACT.network));
 const contract = new web3.eth.Contract(
   window.CONTRACT.abi,
-  window.CONTRACT.address,
-)
+  window.CONTRACT.address
+);
 
 window.onload = async () => {
-  $('#loader').hide()
-  $('.loader-wraper').fadeOut('slow')
-  //check the Url if it was Passed with document hash 
-  $('#upload_file_button').attr('disabled', true)
-  checkURL()
-}
+  $("#loader").hide();
+  $(".loader-wraper").fadeOut("slow");
+  //check the Url if it was Passed with document hash
+  $("#upload_file_button").attr("disabled", true);
+  checkURL();
+};
 async function verify_Hash() {
   //Show the loading
-  $('#loader').show()
+  $("#loader").show();
 
   if (window.hashedfile) {
     /*   I used the contract address (window.CONTRACT.address) as the caller of the function 'findDocHash'
@@ -243,131 +242,131 @@ async function verify_Hash() {
     */
     await contract.methods
       .findDocHash(window.hashedfile)
-      .call({ from: window.CONTRACT.address })
+      .call({ from: '0x08210e8ED3e5b4fAED6D61D82Eb6Fd09d1cE5617' })
       .then((result) => {
-        $('.transaction-status').removeClass('d-none')
-        window.newHash = result
+        $(".transaction-status").removeClass("d-none");
+        window.newHash = result;
         if ((result[0] != 0) & (result[1] != 0)) {
           //Doc Verified
-          print_verification_info(result, true)
+          print_verification_info(result, true);
         } else {
-         //Doc not Verified
-          print_verification_info(result, false)
+          //Doc not Verified
+          print_verification_info(result, false);
         }
-      })
+      });
   }
 }
 
 function checkURL() {
-  let url_string = window.location.href
-  let url = new URL(url_string)
-  window.hashedfile = url.searchParams.get('hash')
-  if (!window.hashedfile) return
+  let url_string = window.location.href;
+  let url = new URL(url_string);
+  window.hashedfile = url.searchParams.get("hash");
+  if (!window.hashedfile) return;
 
-  verify_Hash()
+  verify_Hash();
 }
 // get Sha3 Hash from the file
 async function get_Sha3() {
-  $('#note').html(`<h5 class="text-warning">Hashing Your Document 😴...</h5>`)
-  $('#upload_file_button').attr('disabled', false)
-  console.log('file changed')
-  var file = await document.getElementById('doc-file').files[0]
+  $("#note").html(`<h5 class="text-warning">Hashing Your Document 😴...</h5>`);
+  $("#upload_file_button").attr("disabled", false);
+  console.log("file changed");
+  var file = await document.getElementById("doc-file").files[0];
   if (file) {
-    var reader = new FileReader()
-    reader.readAsText(file, 'UTF-8')
+    var reader = new FileReader();
+    reader.readAsText(file, "UTF-8");
     reader.onload = async function (evt) {
       // var SHA256 = new Hashes.SHA256();
       // = SHA256.hex(evt.target.result);
-      window.hashedfile = await web3.utils.soliditySha3(evt.target.result)
-      console.log(`Document Hash : ${window.hashedfile}`)
-      $('#note').html(
-        `<h5 class="text-center text-info">Document Hashed  😎 </h5>`,
-      )
-    }
+      window.hashedfile = await web3.utils.soliditySha3(evt.target.result);
+      console.log(`Document Hash : ${window.hashedfile}`);
+      $("#note").html(
+        `<h5 class="text-center text-info">Document Hashed  😎 </h5>`
+      );
+    };
     reader.onerror = function (evt) {
-      console.log('error reading file')
-      return false
-    }
+      console.log("error reading file");
+      return false;
+    };
   } else {
-    window.hashedfile = null
-    return false
+    window.hashedfile = null;
+    return false;
   }
 }
 
 function print_verification_info(result, is_verified) {
   //Default Image for not Verified Docunets
-  document.getElementById('student-document').src = './files/notvalid.svg'
-  $('#loader').hide()
+  document.getElementById("student-document").src = "./files/notvalid.svg";
+  $("#loader").hide();
   // when document not verfied
   if (!is_verified) {
     // document.getElementById('download-document').classList.add('d-none')
-    $('#download-document').hide()
-    $('#doc-status').html(`<h3 class="text-danger">
+    $("#download-document").hide();
+    $("#doc-status").html(`<h3 class="text-danger">
         Certificate not Verified 😕
          <i class="text-danger  fa fa-times-circle" aria-hidden="true"></i>
-        </h3>`)
-    $('#file-hash').html(
+        </h3>`);
+    $("#file-hash").html(
       `<span class="text-info"><i class="fa-solid fa-hashtag"></i></span> ${truncateAddress(
-        window.hashedfile,
-      )}`,
-    )
-    $('#college-name').hide()
-    $('#contract-address').hide()
-    $('#time-stamps').hide()
-    $('#blockNumber').hide()
-    $('.transaction-status').show()
+        window.hashedfile
+      )}`
+    );
+    $("#college-name").hide();
+    $("#contract-address").hide();
+    $("#time-stamps").hide();
+    $("#blockNumber").hide();
+    $(".transaction-status").show();
   } else {
-    $('#download-document').show()
+    $("#download-document").show();
     // when document verfied
-    $('#college-name').show()
-    $('#contract-address').show()
-    $('#time-stamps').show()
-    $('#blockNumber').show()
+    $("#college-name").show();
+    $("#contract-address").show();
+    $("#time-stamps").show();
+    $("#blockNumber").show();
 
-    var t = new Date(1970, 0, 1)
-    t.setSeconds(result[1])
-    console.log(result[1])
-    t.setHours(t.getHours() + 3)
+    var t = new Date(1970, 0, 1);
+    t.setSeconds(result[1]);
+    console.log(result[1]);
+    t.setHours(t.getHours() + 3);
     // hide loader
-    $('#loader').hide()
-    $('#doc-status').html(`<h3 class="text-info">
+    $("#loader").hide();
+    $("#doc-status").html(`<h3 class="text-info">
          Certificate Verified Successfully 😊
          <i class="text-info fa fa-check-circle" aria-hidden="true"></i>
-        </h3>`)
-    $('#file-hash').html(
+        </h3>`);
+    $("#file-hash").html(
       `<span class="text-info"><i class="fa-solid fa-hashtag"></i></span> ${truncateAddress(
-        window.hashedfile,
-      )}`,
-    )
-    $('#college-name').html(
-      `<span class="text-info"><i class="fa-solid fa-graduation-cap"></i></span> ${result[2]}`,
-    )
-    $('#contract-address').html(
+        window.hashedfile
+      )}`
+    );
+    $("#college-name").html(
+      `<span class="text-info"><i class="fa-solid fa-graduation-cap"></i></span> ${result[2]}`
+    );
+    $("#contract-address").html(
       `<span class="text-info"><i class="fa-solid fa-file-contract"></i> </span>${truncateAddress(
-        window.CONTRACT.address,
-      )}`,
-    )
-    $('#time-stamps').html(
-      `<span class="text-info"><i class="fa-solid fa-clock"></i> </span>${t}`,
-    )
-    $('#blockNumber').html(
-      `<span class="text-info"><i class="fa-solid fa-cube"></i></span> ${result[0]}`,
-    )
-    document.getElementById('student-document').src =
-      'https://ipfs.io/ipfs/' + result[3]
-    document.getElementById('download-document').href = document.getElementById(
-      'student-document',
-    ).src
-    $('.transaction-status').show()
+        window.CONTRACT.address
+      )}`
+    );
+    $("#time-stamps").html(
+      `<span class="text-info"><i class="fa-solid fa-clock"></i> </span>${t}`
+    );
+    $("#blockNumber").html(
+      `<span class="text-info"><i class="fa-solid fa-cube"></i></span> ${result[0]}`
+    );
+    document.getElementById(
+      "student-document"
+    ).src = `https://ipfs.io/ipfs/${result[3]}`;
+    document.getElementById("download-document").href =
+      document.getElementById("student-document").src;
+    $(".transaction-status").show();
   }
 }
 
 function truncateAddress(address) {
   if (!address) {
-    return
+    return;
   }
   return `${address.substr(0, 7)}...${address.substr(
     address.length - 8,
-    address.length,
-  )}`
+    address.length
+  )}`;
 }
