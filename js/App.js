@@ -3,9 +3,9 @@ const projectId = "28LuNAotbXzcvtpOcE9F8ayKOeP";
 //Your api secret in ifura.io
 const projectSecret = "3de3d9c099c6c0c168e39b8bc03e2f7a";
 window.CONTRACT = {
-  address: "0xAe4Ff83376FeB888355E3e8A4cFe298E561E002C",
-  network: "https://polygon-rpc.com/",
-  explore: "https://polygonscan.com/",
+  address: "Contarct Address after deploying it via Remix Online IDE",
+  network: "Example : https://polygon-rpc.com/",
+  explore: "Example : https://polygonscan.com/",
   // Your Contract ABI
   abi: [
     {
